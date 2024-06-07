@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="stylesheets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ascii Art Web</title>
+</head>
+<body>
+  <div id="main">
+    <div id="main_content">
+    <h1>Ascii-Art-Web</h1>
+    <label>Text:</label>
+    <br>
+    <form method="post">
+   <textarea name="txtarea" id="txtarea"></textarea>
+    <div id="options">
+      <input type="radio" name="op" value="standard" checked>
+   <label>standard</label>
+   <input type="radio" name="op" value="shadow">
+   <label>shadow</label>
+   <input type="radio" name="op" value="thinkertoy"> 
+   <label>thinkertoy</label>
+    </div>
+   <input id="btn_submit" type="submit">
+   <br>
+   <div id="result">
+    <pre>{{.Ascii}}</pre>
+ </div>
+ 
+  </form>
+  </div>
+
+  </div>
+    
+</body>
+</html>

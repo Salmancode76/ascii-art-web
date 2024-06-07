@@ -12,6 +12,8 @@ import (
 func main() {
 	http.HandleFunc("/", handler) // Register the handler function
 
+	//CSS NOT WORKING AFTER POST
+
 	//styles := http.FileServer(http.Dir("stylesheets"))
 	//http.Handle("/stylesheets/", http.StripPrefix("/stylesheets/", styles))
 

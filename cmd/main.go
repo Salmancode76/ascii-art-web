@@ -12,10 +12,8 @@ import (
 func main() {
 	http.HandleFunc("/", handler) // Register the handler function
 
-	//CSS NOT WORKING AFTER POST
-
-	//styles := http.FileServer(http.Dir("stylesheets"))
-	//http.Handle("/stylesheets/", http.StripPrefix("/stylesheets/", styles))
+	styles := http.FileServer(http.Dir("stylesheets"))
+	http.Handle("/stylesheets/", http.StripPrefix("/stylesheets/", styles))
 
 	err := http.ListenAndServe(":8000", nil)
 	if err != nil {
@@ -50,11 +48,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		arr[0] = "../banners/" + file_op + ".txt"
 		//entry of txt
 		fmt.Print(arr[1])
-		for _, v := range arr[1] {
-			if v < 32 || v > 126 {
-				//log.Fatal("wrong text entered!!! ")
-			}
-		}
 
 		if len(arr[1]) == 0 {
 			return
@@ -66,19 +59,22 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			sections = sections[2:]
 
 		}
+
 		for _, s := range sections {
 			if s == "" {
-				fmt.Println()
+				data.Ascii += "<br>"
+
 				continue
 			}
 			cache := [8]string{}
 			for _, r := range s {
 				PKG.Strings(arr[0], r, &cache)
 			}
-			data.Ascii = PKG.PrintA(&cache)
+			data.Ascii = PKG.PrintA(&cache, data.Ascii)
 		}
 	}
 	err = tmpl.Execute(w, data)
+
 	if err != nil {
 		http.Error(w, "Unable to execute template", http.StatusInternalServerError)
 	}
